@@ -59,3 +59,17 @@ Explanation of the query:
 -LENGTH(quote_text): This function calculates the length (number of characters) of the text in the quote_text column for each row. The exact function name might be slightly different in some databases.
 -DESC: This keyword specifies that the results should be ordered in descending order based on the calculated length. This means the longest quote will appear first.
 -LIMIT 1: This clause restricts the output to only the first row of the ordered result. Since the longest quote is now at the top, this effectively retrieves only the longest quote and its corresponding author.
+
+###PART3###
+##Q1.
+Explanation:
+-import pandas as pd: Imports the Pandas library, which is essential for working with DataFrames in Python.
+-csv_file = 'quotes.csv': Defines the name of your CSV file. Make sure to replace 'quotes.csv' with the actual name of your file if it's different.
+-df = pd.read_csv(csv_file): This line loads the data from the CSV file into a Pandas DataFrame named df.
+-print("--- Basic Information ---") and df.info(): The info() method provides a concise summary of the DataFrame, including the number of rows, columns, data types of each column, and the number of non-null values. This helps identify missing data and data types.
+-print("--- First 5 Rows ---") and print(df.head()): The head() method displays the first 5 rows of the DataFrame (you can specify a different number of rows if needed). This gives you a quick look at the data.
+-print(f"--- Unique Authors ---") and unique_authors = df['author'].nunique():
+df['author']: This selects the 'author' column.
+.nunique(): This method returns the number of unique values in the 'author' column.
+-print("--- Descriptive Statistics ---") and print(df.describe(include='all')): The describe() method generates descriptive statistics of the DataFrame.
+include='all': This argument ensures that statistics are calculated for all columns, including non-numeric ones (like count, unique, top, freq for object columns).
