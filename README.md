@@ -26,3 +26,36 @@
 -It creates a csv.DictWriter to write dictionaries as rows in the CSV file.
 -The script writes the header row and then iterates through the data list, writing each quote's dictionary as a row.
 -In short, the script automates the process of extracting quote data from multiple pages of a website and saving it in a structured CSV file.
+
+###PART2###
+#EXPLANATION:
+1.Load CSV Data:
+pd.read_csv('quotes.csv'): Reads the data from the 'quotes.csv' file into a Pandas DataFrame.
+#QUERY1:
+Explanation of the SQL Query:
+-SELECT author, COUNT(*) AS quote_count:  This selects the author column and the count of quotes for each author.  COUNT(*) counts all rows for each group, and AS quote_count gives this count an alias for easier reading.
+-FROM quotes:  This specifies that we're querying the quotes table.
+-GROUP BY author:  This groups the rows by the author column, so COUNT(*) counts the quotes for each unique author.
+-ORDER BY quote_count DESC:  This sorts the results in descending order of the quote count, so the author with the most quotes appears first.
+#QUERY2:
+Explanation of the SQL Query:
+-SELECT tag_name, COUNT(tag_name) AS tag_count: This selects the tag_name column and the count of each unique tag_name. We use the aggregate function COUNT() to count the occurrences of each tag and alias this count as tag_count for clarity in the result.
+-FROM quotes: This specifies that we are querying the quotes table.
+-GROUP BY tag_name: This clause groups the rows in the quotes table based on the values in the tag_name column. This is essential for the COUNT() function to count occurrences of each distinct tag.
+-ORDER BY tag_count DESC: This clause sorts the grouped results in descending order based on the tag_count. This puts the tags with the highest counts at the top.
+-LIMIT 5: This clause restricts the output to the first 5 rows of the sorted result, effectively giving you the top 5 most common tags.
+This query will return a result set with two columns: tag_name and tag_count, showing the top 5 most frequent tags and their respective counts in your quotes table.
+#QUERY3:
+Explanation of the query:
+-SELECT author, COUNT(author) AS quote_count: This selects the author column and the count of quotes for each author. We use the aggregate function COUNT() to count the number of quotes associated with each author and alias this count as quote_count.
+-FROM quotes: This specifies that we are querying the quotes table.
+-GROUP BY author: This clause groups the rows in the quotes table based on the values in the author column. This allows the COUNT() function to count the number of quotes for each unique author.
+-HAVING COUNT(author) > 5: This clause filters the results after the grouping has been performed. It only includes those authors for whom the count of quotes (COUNT(author)) is greater than 5. The HAVING clause is used to filter groups based on aggregate functions, unlike the WHERE clause which filters individual rows before grouping.
+#QUERY4:
+Explanation of the query:
+-SELECT author, quote_text: This selects the author and quote_text columns, which are the information you want to retrieve.
+-FROM quotes: This specifies that you are querying the quotes table.
+-ORDER BY LENGTH(quote_text) DESC: This is the crucial part.
+-LENGTH(quote_text): This function calculates the length (number of characters) of the text in the quote_text column for each row. The exact function name might be slightly different in some databases.
+-DESC: This keyword specifies that the results should be ordered in descending order based on the calculated length. This means the longest quote will appear first.
+-LIMIT 1: This clause restricts the output to only the first row of the ordered result. Since the longest quote is now at the top, this effectively retrieves only the longest quote and its corresponding author.
